@@ -1,0 +1,6 @@
+{
+  "name": "Prashant Patil Portfolio CMS",
+  "description": "Full-stack portfolio with CMS capabilities showcasing technical credentials, projects gallery, and interactive CV of Prashant Patil.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
