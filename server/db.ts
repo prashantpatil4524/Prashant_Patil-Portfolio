@@ -29,6 +29,7 @@ export async function connectToDatabase() {
       serverSelectionTimeoutMS: 3000,
       connectTimeoutMS: 3000,
       socketTimeoutMS: 30000,
+      family: 4,
     });
     console.log("🚀 [DB] Verified connectivity to MongoDB Atlas.");
     
