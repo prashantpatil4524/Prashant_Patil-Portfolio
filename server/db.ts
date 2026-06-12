@@ -25,12 +25,19 @@ export async function connectToDatabase() {
     // Enable Mongoose strictQuery for neat schema parsing
     mongoose.set("strictQuery", true);
     
-    await mongoose.connect(uri, {
+    const connectPromise = mongoose.connect(uri, {
       serverSelectionTimeoutMS: 3000,
       connectTimeoutMS: 3000,
       socketTimeoutMS: 30000,
       family: 4,
     });
+    
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error("MongoDB connection strictly timed out after 4s")), 4000)
+    );
+    
+    await Promise.race([connectPromise, timeoutPromise]);
+    
     console.log("🚀 [DB] Verified connectivity to MongoDB Atlas.");
     
     // Auto-seed Admin and Portfolio
