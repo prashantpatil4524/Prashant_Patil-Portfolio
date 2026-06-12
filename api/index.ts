@@ -49,6 +49,10 @@ app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true, limit: "2mb" }));
 app.use(cors());
 
+app.get("/api/ping", (req: Request, res: Response) => {
+  res.json({ message: "pong", dbInitialized, isDbConnected });
+});
+
 // ── Middleware: ensure DB is connected before handling any request ──
 app.use(async (_req, _res, next) => {
   await ensureDb();
