@@ -27,7 +27,16 @@ export default function AdminLogin({ onSuccess, onCancel }: AdminLoginProps) {
         body: JSON.stringify({ email: emailInput, password }),
       });
 
-      const data = await response.json();
+      // Safely parse JSON — if Vercel returns an HTML error page, don't crash
+      let data: any = {};
+      const contentType = response.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.error("Non-JSON response from API:", text.slice(0, 200));
+        throw new Error("API server is unavailable. Please check Vercel environment variables (MONGO_URI, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD).");
+      }
 
       if (!response.ok) {
         throw new Error(data.error || "Authentication failed. Correct parameters required.");

@@ -11,7 +11,7 @@ export const initialProfile: ProfileDetails = {
   linkedin: "https://www.linkedin.com/in/prashantpatil4524",
   twitter: "https://twitter.com/prashant_p_4524",
   leetcode: "https://leetcode.com/prashantpatil4524",
-  avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuDVZ0xcBJsgUoB2TpB2yVaJ8rzAUSgcj9ugD0sE_-nohH7TZKntf5JrKzClYsvWBH93RfnIJP5RAmrAnOy8qjiWO6EzUZo998ylK8qgPNaWD9RxR3hzIOsZ8F8Jt19eNKeMnsmDVBByTMraOcn_3lVQiEz6eToXl2h6KC7A28bvn3xqWgACr9kK94i6yGK8wQPzlkpMGsS_cDijqt32QlI7A7DwPCsargxxvHg9moJks6uemeReIbZlAa6rJiFBydjfz05mDRy1WBB8"
+  avatar: "https://ui-avatars.com/api/?name=Prashant+Patil&size=400&background=cc0000&color=fff&bold=true&format=png"
 };
 
 export const initialCategories: Category[] = [
@@ -32,7 +32,7 @@ export const initialProjects: Project[] = [
     category: "cv",
     date: "Feb - Apr 2026",
     tags: ["Python", "PyTorch", "FastAPI", "React.js", "OpenCV", "EfficientNet-B4", "LSTM", "MTCNN", "Docker", "Firebase"],
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAAxsruh3QWeb2XQZC_8Vma2E6kuwi9GdUu3cx2Iqz3jVppTZw163lE7b5V4EdtZS3qMCFV8rVRIUTWsQfZpMM0S3dtFcUn-UhQJJlyY-ieiYclZbFfgiP9-S-OQJFj3tlvsfZsHld0q8X4BUpNuYrtwyS6YjzsiBxeE07GOfQxEyd8S0Kq_cAPHw_HQtIuQ5AeCG55qTGZr9xgWMZjaz3_b8gTwzjbaN7aKWgMNUOfXo50PG9vDzUVxaRWhbAdwwYGLOyv_UiNY8jo",
+    image: "https://placehold.co/800x500/0a0a0a/cc0000?text=DeepFake+Detection+System&font=montserrat",
     version: "v2.4.0",
     isPublic: true,
     teamSize: "5",
@@ -47,7 +47,7 @@ export const initialProjects: Project[] = [
     category: "ml",
     date: "Jan - May 2025",
     tags: ["Python", "Flask", "Machine Learning", "HTML/CSS", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn"],
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDZrbK4SYfhRSFsyh9ugm2czKUkNKdDzz1n3TdbpmA7s_8Qf_MmHWvVT5A1TlHMauqa854h7S1SRpj9WYy2wPpe0ijG1YEEyykXavrwp_IE0Iuapm1TcAn_FftOJfYbgbJV85at-9karWTgpBPKZJvYGCizzzm9ubZEtFoP1AJ3umi0Ns8L5W1EoEd_qlDiPXfkP0ODvRk9uIHQs5Jr10sUxTV9nyQrN84n5O3xwG_pxn1oZKLo9EtLENdrU8hHfcOdAh3Z1cwajyE8",
+    image: "https://placehold.co/800x500/0a0a0a/22c55e?text=Agri+Sense+Crop+Prediction&font=montserrat",
     version: "v1.1.2",
     isPublic: true,
     teamSize: "1 (Solo)",
@@ -62,7 +62,7 @@ export const initialProjects: Project[] = [
     category: "ml",
     date: "Oct - Dec 2024",
     tags: ["Python", "Streamlit", "Spotify Dataset", "Scikit-Learn", "Pandas", "NumPy", "Matplotlib", "K-Means"],
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAhc5xUhfkIMCexUvQykMwoxIAufbNtf_YfGM-yTMkdpaDQT6TNFiVNxdjSOZNh3lOn7vz2Feb_3R_p1qm4uuiuULqHm04XSsDKIDb6EmJ7DAbRXdlyvLILhevYZsT4tAaWaWteKe5SHtabenqWDy9GcPQJeM7LjbAG-tkQFK-VzHNoARu07Ahs6vzJi4r1oE04KrcIxnAQFbwAwyfNiDu-7GHTae9qeCk93qe-ZCW90-QjDxSJ814tc4TZdjjQQBeYrfn1XEgVvk0x",
+    image: "https://placehold.co/800x500/0a0a0a/6366f1?text=Music+Genre+Recommender&font=montserrat",
     version: "v1.0.0",
     isPublic: true,
     teamSize: "1",
@@ -77,7 +77,7 @@ export const initialProjects: Project[] = [
     category: "ml",
     date: "Jun - Aug 2024",
     tags: ["Python", "Pandas", "NumPy", "Scikit-Learn", "Jupyter Notebook", "Linear Regression", "Seaborn"],
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD4kfxnwhPXH52E9Wb4OA_xC4f7--H7g2JQXvfXDCU1f6faKVaR1ZW8_UpG6BqTz7YNteCe4e3jL3kJQjgZYfVDVco_A0s_xgEW4QOBy7g-2iLLrcWTsoPRp8wxx9_1Nz-Z4NHOICY0g3b33I8J5aIh3-UjzZO5-uwXmj0txvDQU4o3J287OBD2nmNrbpLDMu9ILONSCk3KY9uuaLj5yJ4J4l10sUSmANqml7SAvrzqYrEsqzIFyAcQL2PO4q0nYHC3Revp0nsE853y",
+    image: "https://placehold.co/800x500/0a0a0a/f59e0b?text=Mumbai+Property+Predictor&font=montserrat",
     version: "v0.9.5",
     isPublic: true,
     teamSize: "1",
@@ -92,7 +92,7 @@ export const initialProjects: Project[] = [
     category: "cyber",
     date: "Jun - Jul 2024",
     tags: ["SQL", "HTML/CSS", "JavaScript", "Security Audit", "Prepared Statements"],
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBS3Tn3BRmU_oSe522DjLxwOU-nJ_70y9M8T-OkbFJaBWwrskXN4bzw78vEtvinblC8A0z5j73nI9h_cnDvsOp87v2vvRoF71k-qvdYOfXMfBm0r_riXjcdg4N_l0tUdpFi6MusgWJk0n6jGW6uYeDm449Ra2sw7FzCOOt1QzSmDqjrHWUCC5GR7sCbU9CpQufld15wSNcNd7j8fI3o4_1-WIBzuT1eomHEyUOj_iOTEZ4txso4BFVXzhw0GR2RbJFGWqX31vx5Rauw",
+    image: "https://placehold.co/800x500/0a0a0a/ef4444?text=SQL+Injection+Guard&font=montserrat",
     version: "v1.0.1",
     isPublic: false,
     teamSize: "1",
