@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import { connectToDatabase } from "../server/db";
-import { Admin, Portfolio, Message } from "../server/models";
-import { authLimit, verifyAdminToken, getJwtSecret, AuthenticatedRequest } from "../server/auth";
+import { connectToDatabase } from "../server/db.js";
+import { Admin, Portfolio, Message } from "../server/models.js";
+import { authLimit, verifyAdminToken, getJwtSecret, AuthenticatedRequest } from "../server/auth.js";
 
 import {
   initialProfile,
@@ -18,7 +18,7 @@ import {
   initialCertifications,
   initialExperiences,
   initialAchievements,
-} from "../src/mockData";
+} from "../src/mockData.js";
 
 // In-memory fallback (lives for the duration of a serverless invocation)
 let memoryPortfolio = {

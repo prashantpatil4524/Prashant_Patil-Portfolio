@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-import { Admin, Portfolio } from "./models";
+import { Admin, Portfolio } from "./models.js";
 
 // Import raw initial data for auto-seeding if Database starts empty
 import { 
@@ -11,7 +11,7 @@ import {
   initialCertifications,
   initialExperiences,
   initialAchievements
-} from "../src/mockData";
+} from "../src/mockData.js";
 
 export async function connectToDatabase() {
   const uri = process.env.MONGO_URI;
