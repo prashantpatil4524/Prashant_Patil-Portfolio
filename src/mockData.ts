@@ -11,7 +11,7 @@ export const initialProfile: ProfileDetails = {
   linkedin: "https://www.linkedin.com/in/prashantpatil4524",
   twitter: "https://twitter.com/prashant_p_4524",
   leetcode: "https://leetcode.com/prashantpatil4524",
-  avatar: "https://ui-avatars.com/api/?name=Prashant+Patil&size=400&background=cc0000&color=fff&bold=true&format=png"
+  avatar: "https://drive.google.com/file/d/14kmbP6XImEaBPk8ER2lHgyza2oGwwuzm/view?usp=sharing"
 };
 
 export const initialCategories: Category[] = [
