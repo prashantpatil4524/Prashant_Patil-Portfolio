@@ -38,8 +38,8 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [adminToken, setAdminToken] = useState<string | null>(localStorage.getItem("admin_token"));
 
-  // DYNAMIC 4-THEMES STATE (LOADS & PERSISTS CHOSEN MODE)
-  const [theme, setTheme] = useState<"racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold">("racing-red");
+  // DYNAMIC 5-THEMES STATE (LOADS & PERSISTS CHOSEN MODE)
+  const [theme, setTheme] = useState<"racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold" | "obsidian-gold">("racing-red");
 
   // LOAD PORTFOLIO & VERIFY SESSION ON BOOT
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function App() {
     // 2. Load Theme Setup from local browser preference
     try {
       const storedTheme = localStorage.getItem("portfolio_theme");
-      if (storedTheme && ["racing-red", "emerald-green", "cosmic-indigo", "alabaster-gold"].includes(storedTheme)) {
+      if (storedTheme && ["racing-red", "emerald-green", "cosmic-indigo", "alabaster-gold", "obsidian-gold"].includes(storedTheme)) {
         setTheme(storedTheme as any);
       }
     } catch (e) {
@@ -147,12 +147,12 @@ export default function App() {
       root.style.backgroundColor = "#fafaf5";
     } else {
       root.classList.add("dark");
-      root.style.backgroundColor = "#070707";
+      root.style.backgroundColor = theme === "obsidian-gold" ? "#0a0804" : "#070707";
     }
   }, [theme]);
 
   // THEME CHANGER COORD
-  const handleThemeChange = (newTheme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold") => {
+  const handleThemeChange = (newTheme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold" | "obsidian-gold") => {
     setTheme(newTheme);
     localStorage.setItem("portfolio_theme", newTheme);
   };

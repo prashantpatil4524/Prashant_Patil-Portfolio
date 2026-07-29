@@ -8,8 +8,8 @@ interface NavbarProps {
   onEnterAdmin: () => void;
   onScrollTo: (sectionId: string) => void;
   activeSection: string;
-  theme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold";
-  onThemeChange: (newTheme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold") => void;
+  theme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold" | "obsidian-gold";
+  onThemeChange: (newTheme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold" | "obsidian-gold") => void;
 }
 
 export default function Navbar({
@@ -26,7 +26,8 @@ export default function Navbar({
     { id: "racing-red", name: "Redline Red", colorClass: "bg-red-600 border-red-400" },
     { id: "emerald-green", name: "Hacker Green", colorClass: "bg-emerald-500 border-emerald-350" },
     { id: "cosmic-indigo", name: "Cosmic Indigo", colorClass: "bg-indigo-600 border-indigo-400" },
-    { id: "alabaster-gold", name: "Luxury Alabaster", colorClass: "bg-amber-600 border-amber-400" }
+    { id: "alabaster-gold", name: "Luxury Alabaster", colorClass: "bg-amber-100 border-amber-400" },
+    { id: "obsidian-gold", name: "Obsidian Gold", colorClass: "bg-yellow-500 border-yellow-300" }
   ] as const;
 
   return (

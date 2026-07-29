@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 interface ShaderBackgroundProps {
-  theme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold";
+  theme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold" | "obsidian-gold";
 }
 
 export default function ShaderBackground({ theme }: ShaderBackgroundProps) {
@@ -181,6 +181,9 @@ export default function ShaderBackground({ theme }: ShaderBackgroundProps) {
       } else if (curTheme === "alabaster-gold") {
         glowR = 0.85; glowG = 0.47; glowB = 0.02;
         bgR = 0.98; bgG = 0.98; bgB = 0.96;
+      } else if (curTheme === "obsidian-gold") {
+        glowR = 0.96; glowG = 0.62; glowB = 0.04;
+        bgR = 0.04; bgG = 0.03; bgB = 0.02;
       }
 
       gl.uniform3f(uGlowColorLoc, glowR, glowG, glowB);

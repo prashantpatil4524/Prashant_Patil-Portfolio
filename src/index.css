@@ -92,6 +92,24 @@
   --glass-highlight: rgba(255, 255, 255, 0.5);
 }
 
+/* 🪙 THEME 5: OBSIDIAN GOLD (DARK MODE) */
+:root[data-theme="obsidian-gold"] {
+  --primary: #f59e0b;
+  --primary-hover: #d97706;
+  --bg-base: #0a0804;
+  --surface-base: #141108;
+  --text-on-surface-val: #fef8eb;
+  --text-secondary-val: #c2b090;
+  --border-stroke-val: rgba(245, 158, 11, 0.15);
+  --accent-dim: rgba(245, 158, 11, 0.12);
+  --glow-primary: rgba(245, 158, 11, 0.6);
+  --glow-primary-intense: rgba(245, 158, 11, 0.9);
+  --glow-soft: rgba(245, 158, 11, 0.15);
+  --glass-bg: rgba(10, 8, 4, 0.6);
+  --glass-border: rgba(245, 158, 11, 0.08);
+  --glass-highlight: rgba(245, 158, 11, 0.04);
+}
+
 @theme {
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);

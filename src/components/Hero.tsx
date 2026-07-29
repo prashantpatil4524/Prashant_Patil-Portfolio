@@ -24,8 +24,8 @@ interface HeroProps {
   profile: ProfileDetails;
   featuredProject: Project | undefined;
   onScrollTo: (id: string) => void;
-  theme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold";
-  onThemeSelect: (newTheme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold") => void;
+  theme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold" | "obsidian-gold";
+  onThemeSelect: (newTheme: "racing-red" | "emerald-green" | "cosmic-indigo" | "alabaster-gold" | "obsidian-gold") => void;
 }
 
 export default function Hero({ 
