@@ -39,7 +39,7 @@ let isDbConnected = false;
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
   // Trust upstream reverse proxy (Cloud Run / Vercel router) to correctly resolve client IPs for the rate limiter
   app.set("trust proxy", 1);
