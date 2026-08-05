@@ -1084,8 +1084,8 @@ export default function AdminPanel({
                   setEditingEduId(null);
                 } else {
                   onUpdateEducations([
-                    ...educations,
-                    { id: `edu-${Date.now()}`, institution: eduInst, degree: eduDegree, date: eduDate, grade: eduGrade }
+                    { id: `edu-${Date.now()}`, institution: eduInst, degree: eduDegree, date: eduDate, grade: eduGrade },
+                    ...educations
                   ]);
                   triggerAlert("New Education entry published.");
                 }
@@ -1206,8 +1206,8 @@ export default function AdminPanel({
                   setEditingExpId(null);
                 } else {
                   onUpdateExperiences([
-                    ...experiences,
-                    { id: `exp-${Date.now()}`, company: expCompany, role: expRole, period: expPeriod, bullets }
+                    { id: `exp-${Date.now()}`, company: expCompany, role: expRole, period: expPeriod, bullets },
+                    ...experiences
                   ]);
                   triggerAlert("New Experience parameters compiled.");
                 }
@@ -1329,8 +1329,8 @@ export default function AdminPanel({
                   setEditingCertId(null);
                 } else {
                   onUpdateCertifications([
-                    ...certifications,
-                    { id: `cert-${Date.now()}`, title: certName, issuer: certIssuer, date: certDate, proofLink: certProof }
+                    { id: `cert-${Date.now()}`, title: certName, issuer: certIssuer, date: certDate, proofLink: certProof },
+                    ...certifications
                   ]);
                   triggerAlert("Verified certificate synced.");
                 }
@@ -1446,8 +1446,8 @@ export default function AdminPanel({
                   setEditingAchId(null);
                 } else {
                   onUpdateAchievements([
-                    ...achievements,
-                    { id: `ach-${Date.now()}`, title: achTitle, details: achDetails }
+                    { id: `ach-${Date.now()}`, title: achTitle, details: achDetails },
+                    ...achievements
                   ]);
                   triggerAlert("Scholastic milestone declared.");
                 }
