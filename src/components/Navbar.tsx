@@ -1,6 +1,6 @@
 import { Lock, Linkedin, Twitter, Mail, Phone, Github, Code2 } from "lucide-react";
 import { ProfileDetails } from "../types";
-import { getDirectImageUrl } from "../utils";
+import { getDirectImageUrl, sanitizeUrl } from "../utils";
 
 interface NavbarProps {
   profile: ProfileDetails;
@@ -112,32 +112,32 @@ export default function Navbar({
           {/* CONTACT & SOCIAL SYMBOLS GROUP sticky top corner */}
           <div className="hidden lg:flex items-center gap-4 border-r border-[#eaeaea] dark:border-zinc-800 pr-4 text-zinc-550 dark:text-zinc-400">
             {profile?.linkedin && (
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-all duration-300 hover:scale-115" title="LinkedIn Profile">
+              <a href={sanitizeUrl(profile.linkedin)} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-all duration-300 hover:scale-115" title="LinkedIn Profile">
                 <Linkedin className="w-4 h-4" />
               </a>
             )}
             {profile?.twitter && (
-              <a href={profile.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-all duration-300 hover:scale-115" title="Twitter Profile">
+              <a href={sanitizeUrl(profile.twitter)} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-all duration-300 hover:scale-115" title="Twitter Profile">
                 <Twitter className="w-4 h-4" />
               </a>
             )}
             {profile?.github && (
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-all duration-300 hover:scale-115" title="GitHub Directory">
+              <a href={sanitizeUrl(profile.github)} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-all duration-300 hover:scale-115" title="GitHub Directory">
                 <Github className="w-4 h-4" />
               </a>
             )}
             {profile?.leetcode && (
-              <a href={profile.leetcode} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-all duration-300 hover:scale-115" title="LeetCode Profile">
+              <a href={sanitizeUrl(profile.leetcode)} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-all duration-300 hover:scale-115" title="LeetCode Profile">
                 <Code2 className="w-4 h-4" />
               </a>
             )}
             {profile?.email && (
-              <a href={`mailto:${profile.email}`} className="hover:text-primary transition-all duration-300 hover:scale-115" title="Send Email">
+              <a href={sanitizeUrl(`mailto:${profile.email}`)} className="hover:text-primary transition-all duration-300 hover:scale-115" title="Send Email">
                 <Mail className="w-4 h-4" />
               </a>
             )}
             {profile?.phone && (
-              <a href={`tel:${profile.phone}`} className="hover:text-primary transition-all duration-300 hover:scale-115" title="Call Direct">
+              <a href={sanitizeUrl(`tel:${profile.phone}`)} className="hover:text-primary transition-all duration-300 hover:scale-115" title="Call Direct">
                 <Phone className="w-4 h-4" />
               </a>
             )}

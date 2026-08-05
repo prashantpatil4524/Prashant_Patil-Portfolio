@@ -26,3 +26,20 @@ export function getDirectImageUrl(url: string | undefined): string {
   
   return trimmed;
 }
+
+/**
+ * Sanitizes URLs to prevent XSS injection (e.g. javascript: or data: schemes).
+ */
+export function sanitizeUrl(url: string | undefined): string {
+  if (!url) return "";
+  const trimmed = url.trim();
+  const lower = trimmed.toLowerCase();
+  if (lower.startsWith("javascript:") || lower.startsWith("data:") || lower.startsWith("vbscript:")) {
+    return "#";
+  }
+  // If it doesn't start with a protocol, prefix with https:// if it is an external link
+  if (trimmed.length > 0 && !lower.startsWith("http://") && !lower.startsWith("https://") && !lower.startsWith("/") && !lower.startsWith("#") && !lower.startsWith("mailto:") && !lower.startsWith("tel:")) {
+    return `https://${trimmed}`;
+  }
+  return trimmed;
+}

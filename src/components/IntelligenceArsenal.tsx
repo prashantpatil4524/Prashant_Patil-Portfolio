@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Certification, AchievementItem } from "../types";
 import { Cpu, Award, Badge, ExternalLink } from "lucide-react";
+import { sanitizeUrl } from "../utils";
 
 interface ArsenalProps {
   certifications: Certification[];
@@ -329,7 +330,7 @@ export default function IntelligenceArsenal({ certifications, achievements }: Ar
                     {cert.proofLink && (
                       <div className="mt-4 pl-4 flex">
                         <a
-                          href={cert.proofLink}
+                          href={sanitizeUrl(cert.proofLink)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 font-mono text-[9px] tracking-widest bg-white/[0.03] hover:bg-primary/20 hover:shadow-[0_0_12px_var(--glow-soft)] text-zinc-200 uppercase border border-[var(--glass-border)] hover:border-primary/40 transition-all duration-300 px-4 py-2 font-bold"

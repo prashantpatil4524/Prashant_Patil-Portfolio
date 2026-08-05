@@ -149,13 +149,15 @@ export default function Hero({
               <ArrowRight className="w-4 h-4" />
             </button>
 
-            <button 
-              onClick={() => setIsCVOpen(true)}
-              className="border border-glass-stroke text-on-surface hover:bg-zinc-100 dark:hover:bg-zinc-900/40 px-7 py-3.5 font-mono text-xs tracking-widest uppercase transition-all duration-300 rounded-none cursor-pointer flex items-center gap-2 active:scale-95"
+            <a 
+              href="https://drive.google.com/file/d/16Yc_2MPx-z1PAT76UyGqRJQftTfuMBD-/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-glass-stroke text-on-surface hover:bg-zinc-100 dark:hover:bg-zinc-900/40 px-7 py-3.5 font-mono text-xs tracking-widest uppercase transition-all duration-300 rounded-none cursor-pointer flex items-center gap-2 active:scale-95 inline-flex items-center text-center"
             >
               <FileText className="w-4 h-4 text-primary" />
               Examine CV.md
-            </button>
+            </a>
           </div>
 
           {/* Social icons */}

@@ -103,6 +103,32 @@ export default function AdminPanel({
   // Category State
   const [newCategoryName, setNewCategoryName] = useState("");
 
+  // Education Form States
+  const [eduInst, setEduInst] = useState("");
+  const [eduDegree, setEduDegree] = useState("");
+  const [eduDate, setEduDate] = useState("");
+  const [eduGrade, setEduGrade] = useState("");
+  const [editingEduId, setEditingEduId] = useState<string | null>(null);
+
+  // Experience Form States
+  const [expCompany, setExpCompany] = useState("");
+  const [expRole, setExpRole] = useState("");
+  const [expPeriod, setExpPeriod] = useState("");
+  const [expBullets, setExpBullets] = useState("");
+  const [editingExpId, setEditingExpId] = useState<string | null>(null);
+
+  // Certification Form States
+  const [certName, setCertName] = useState("");
+  const [certIssuer, setCertIssuer] = useState("");
+  const [certDate, setCertDate] = useState("");
+  const [certProof, setCertProof] = useState("");
+  const [editingCertId, setEditingCertId] = useState<string | null>(null);
+
+  // Achievement Form States
+  const [achTitle, setAchTitle] = useState("");
+  const [achDetails, setAchDetails] = useState("");
+  const [editingAchId, setEditingAchId] = useState<string | null>(null);
+
   // Alert State
   const [alertMsg, setAlertMsg] = useState("");
 
@@ -1042,41 +1068,66 @@ export default function AdminPanel({
                 </h3>
               </div>
               
-              {/* Form to Add New Education */}
+              {/* Form to Add / Edit Education */}
               <form onSubmit={(e) => {
                 e.preventDefault();
-                const form = e.currentTarget;
-                const institution = (form.elements.namedItem("eduInst") as HTMLInputElement).value;
-                const degree = (form.elements.namedItem("eduDegree") as HTMLInputElement).value;
-                const date = (form.elements.namedItem("eduDate") as HTMLInputElement).value;
-                const grade = (form.elements.namedItem("eduGrade") as HTMLInputElement).value;
+                if (!eduInst || !eduDegree || !eduDate || !eduGrade) return;
                 
-                onUpdateEducations([
-                  ...educations,
-                  { id: `edu-${Date.now()}`, institution, degree, date, grade }
-                ]);
-                form.reset();
-                triggerAlert("New Education block spawned.");
+                if (editingEduId) {
+                  const updated = educations.map(x => 
+                    x.id === editingEduId 
+                      ? { id: editingEduId, institution: eduInst, degree: eduDegree, date: eduDate, grade: eduGrade }
+                      : x
+                  );
+                  onUpdateEducations(updated);
+                  triggerAlert("Education record successfully updated.");
+                  setEditingEduId(null);
+                } else {
+                  onUpdateEducations([
+                    ...educations,
+                    { id: `edu-${Date.now()}`, institution: eduInst, degree: eduDegree, date: eduDate, grade: eduGrade }
+                  ]);
+                  triggerAlert("New Education entry published.");
+                }
+                setEduInst("");
+                setEduDegree("");
+                setEduDate("");
+                setEduGrade("");
               }} className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 bg-[#111] p-5 border border-glass-stroke">
-                <div className="md:col-span-4 text-xs font-mono font-black text-primary uppercase tracking-widest mb-1">
-                  Spawn New Education Entry
+                <div className="md:col-span-4 text-xs font-mono font-black text-primary uppercase tracking-widest mb-1 flex justify-between items-center">
+                  <span>{editingEduId ? "Modify Selected Education Record" : "Spawn New Education Entry"}</span>
+                  {editingEduId && (
+                    <button 
+                      type="button" 
+                      onClick={() => {
+                        setEditingEduId(null);
+                        setEduInst("");
+                        setEduDegree("");
+                        setEduDate("");
+                        setEduGrade("");
+                      }}
+                      className="text-zinc-500 hover:text-white font-mono text-[9px] uppercase tracking-widest cursor-pointer border border-glass-stroke px-2 py-1"
+                    >
+                      Cancel Edit
+                    </button>
+                  )}
                 </div>
                 <div>
-                  <input name="eduInst" placeholder="Lovely Professional University" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="eduInst" placeholder="Lovely Professional University" required value={eduInst} onChange={(e) => setEduInst(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 </div>
                 <div>
-                  <input name="eduDegree" placeholder="Master of Computer Applications" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="eduDegree" placeholder="Master of Computer Applications" required value={eduDegree} onChange={(e) => setEduDegree(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 </div>
                 <div>
-                  <input name="eduDate" placeholder="2024 - 2026" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="eduDate" placeholder="2024 - 2026" required value={eduDate} onChange={(e) => setEduDate(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 </div>
                 <div>
-                  <input name="eduGrade" placeholder="CGPA: 8.5" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="eduGrade" placeholder="CGPA: 8.5" required value={eduGrade} onChange={(e) => setEduGrade(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 </div>
                 <div className="md:col-span-4 flex justify-end">
                   <button type="submit" className="px-5 py-2.5 bg-[#e31b23] text-white font-label-md text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all font-black cursor-pointer flex items-center gap-1.5">
                     <Plus className="w-3.5 h-3.5" />
-                    Add Education Record
+                    {editingEduId ? "Update Record" : "Add Education Record"}
                   </button>
                 </div>
               </form>
@@ -1093,15 +1144,36 @@ export default function AdminPanel({
                         <span>Performance: {edu.grade}</span>
                       </div>
                     </div>
-                    <button 
-                      onClick={() => {
-                        onUpdateEducations(educations.filter(x => x.id !== edu.id));
-                        triggerAlert("Education record purged.");
-                      }}
-                      className="px-2.5 py-1.5 border border-glass-stroke hover:bg-[#e31b23]/10 hover:border-[#e31b23] text-[#e31b23] font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
-                    >
-                      Delete
-                    </button>
+                    <div className="flex gap-2">
+                      <button 
+                        onClick={() => {
+                          setEditingEduId(edu.id);
+                          setEduInst(edu.institution);
+                          setEduDegree(edu.degree);
+                          setEduDate(edu.date);
+                          setEduGrade(edu.grade);
+                        }}
+                        className="px-2.5 py-1.5 border border-glass-stroke hover:bg-primary/10 hover:border-primary text-primary font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        onClick={() => {
+                          onUpdateEducations(educations.filter(x => x.id !== edu.id));
+                          triggerAlert("Education record purged.");
+                          if (editingEduId === edu.id) {
+                            setEditingEduId(null);
+                            setEduInst("");
+                            setEduDegree("");
+                            setEduDate("");
+                            setEduGrade("");
+                          }
+                        }}
+                        className="px-2.5 py-1.5 border border-glass-stroke hover:bg-[#e31b23]/10 hover:border-[#e31b23] text-[#e31b23] font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1116,40 +1188,65 @@ export default function AdminPanel({
                 </h3>
               </div>
 
-              {/* Form to Add New Experience */}
+              {/* Form to Add / Edit Experience */}
               <form onSubmit={(e) => {
                 e.preventDefault();
-                const form = e.currentTarget;
-                const company = (form.elements.namedItem("expCompany") as HTMLInputElement).value;
-                const role = (form.elements.namedItem("expRole") as HTMLInputElement).value;
-                const period = (form.elements.namedItem("expPeriod") as HTMLInputElement).value;
-                const bulletsRaw = (form.elements.namedItem("expBullets") as HTMLTextAreaElement).value;
+                if (!expCompany || !expRole || !expPeriod || !expBullets) return;
                 
-                const bullets = bulletsRaw.split("\n").map(b => b.trim()).filter(b => b.length > 0);
+                const bullets = expBullets.split("\n").map(b => b.trim()).filter(b => b.length > 0);
 
-                onUpdateExperiences([
-                  ...experiences,
-                  { id: `exp-${Date.now()}`, company, role, period, bullets }
-                ]);
-                form.reset();
-                triggerAlert("New Experience parameters compiled.");
+                if (editingExpId) {
+                  const updated = experiences.map(x => 
+                    x.id === editingExpId 
+                      ? { id: editingExpId, company: expCompany, role: expRole, period: expPeriod, bullets }
+                      : x
+                  );
+                  onUpdateExperiences(updated);
+                  triggerAlert("Experience item successfully updated.");
+                  setEditingExpId(null);
+                } else {
+                  onUpdateExperiences([
+                    ...experiences,
+                    { id: `exp-${Date.now()}`, company: expCompany, role: expRole, period: expPeriod, bullets }
+                  ]);
+                  triggerAlert("New Experience parameters compiled.");
+                }
+                setExpCompany("");
+                setExpRole("");
+                setExpPeriod("");
+                setExpBullets("");
               }} className="space-y-4 mb-8 bg-[#111] p-5 border border-glass-stroke text-xs">
-                <div className="text-xs font-mono font-black text-primary uppercase tracking-widest mb-1">
-                  Deploy New Experience Record
+                <div className="text-xs font-mono font-black text-primary uppercase tracking-widest mb-1 flex justify-between items-center">
+                  <span>{editingExpId ? "Modify Professional Experience Entry" : "Deploy New Experience Record"}</span>
+                  {editingExpId && (
+                    <button 
+                      type="button" 
+                      onClick={() => {
+                        setEditingExpId(null);
+                        setExpCompany("");
+                        setExpRole("");
+                        setExpPeriod("");
+                        setExpBullets("");
+                      }}
+                      className="text-zinc-500 hover:text-white font-mono text-[9px] uppercase tracking-widest cursor-pointer border border-glass-stroke px-2 py-1"
+                    >
+                      Cancel Edit
+                    </button>
+                  )}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <input name="expCompany" placeholder="Maxgen Technologies Pvt. Ltd." required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
-                  <input name="expRole" placeholder="Data Science & ML Intern" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
-                  <input name="expPeriod" placeholder="Jun 2024 - Aug 2024" required className="w-full bg-[#111] border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="expCompany" placeholder="Maxgen Technologies Pvt. Ltd." required value={expCompany} onChange={(e) => setExpCompany(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="expRole" placeholder="Data Science & ML Intern" required value={expRole} onChange={(e) => setExpRole(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="expPeriod" placeholder="Jun 2024 - Aug 2024" required value={expPeriod} onChange={(e) => setExpPeriod(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 </div>
                 <div>
                   <label className="block text-secondary font-mono text-[9px] uppercase tracking-widest mb-1">Bullet Achievements (One item per line)</label>
-                  <textarea name="expBullets" rows={3} placeholder="Cleaned real estate datasets...&#10;Built ML models using Scikit-Learn..." required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <textarea name="expBullets" rows={3} placeholder="Cleaned real estate datasets...&#10;Built ML models using Scikit-Learn..." required value={expBullets} onChange={(e) => setExpBullets(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 </div>
                 <div className="flex justify-end">
                   <button type="submit" className="px-5 py-2.5 bg-[#e31b23] text-white font-label-md text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all font-black cursor-pointer flex items-center gap-1.5">
                     <Plus className="w-3.5 h-3.5" />
-                    Deploy Experience Record
+                    {editingExpId ? "Update Experience" : "Deploy Experience Record"}
                   </button>
                 </div>
               </form>
@@ -1165,15 +1262,36 @@ export default function AdminPanel({
                         {exp.bullets.map((b, i) => <li key={i}>{b}</li>)}
                       </ul>
                     </div>
-                    <button 
-                      onClick={() => {
-                        onUpdateExperiences(experiences.filter(x => x.id !== exp.id));
-                        triggerAlert("Experience item deleted.");
-                      }}
-                      className="px-2.5 py-1.5 border border-glass-stroke hover:bg-[#e31b23]/10 hover:border-[#e31b23] text-[#e31b23] font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all flex-shrink-0"
-                    >
-                      Delete
-                    </button>
+                    <div className="flex gap-2 flex-shrink-0">
+                      <button 
+                        onClick={() => {
+                          setEditingExpId(exp.id);
+                          setExpCompany(exp.company);
+                          setExpRole(exp.role);
+                          setExpPeriod(exp.period);
+                          setExpBullets(exp.bullets.join("\n"));
+                        }}
+                        className="px-2.5 py-1.5 border border-glass-stroke hover:bg-primary/10 hover:border-primary text-primary font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        onClick={() => {
+                          onUpdateExperiences(experiences.filter(x => x.id !== exp.id));
+                          triggerAlert("Experience item deleted.");
+                          if (editingExpId === exp.id) {
+                            setEditingExpId(null);
+                            setExpCompany("");
+                            setExpRole("");
+                            setExpPeriod("");
+                            setExpBullets("");
+                          }
+                        }}
+                        className="px-2.5 py-1.5 border border-glass-stroke hover:bg-[#e31b23]/10 hover:border-[#e31b23] text-[#e31b23] font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1195,36 +1313,61 @@ export default function AdminPanel({
                 </h3>
               </div>
 
-              {/* Form to Add New Certification */}
+              {/* Form to Add / Edit Certification */}
               <form onSubmit={(e) => {
                 e.preventDefault();
-                const form = e.currentTarget;
-                const title = (form.elements.namedItem("certName") as HTMLInputElement).value;
-                const issuer = (form.elements.namedItem("certIssuer") as HTMLInputElement).value;
-                const date = (form.elements.namedItem("certDate") as HTMLInputElement).value;
-                const proofLink = (form.elements.namedItem("certProof") as HTMLInputElement).value;
+                if (!certName || !certIssuer || !certDate) return;
                 
-                onUpdateCertifications([
-                  ...certifications,
-                  { id: `cert-${Date.now()}`, title, issuer, date, proofLink }
-                ]);
-                form.reset();
-                triggerAlert("Verified certificate synced.");
+                if (editingCertId) {
+                  const updated = certifications.map(x => 
+                    x.id === editingCertId 
+                      ? { id: editingCertId, title: certName, issuer: certIssuer, date: certDate, proofLink: certProof }
+                      : x
+                  );
+                  onUpdateCertifications(updated);
+                  triggerAlert("Certification successfully updated.");
+                  setEditingCertId(null);
+                } else {
+                  onUpdateCertifications([
+                    ...certifications,
+                    { id: `cert-${Date.now()}`, title: certName, issuer: certIssuer, date: certDate, proofLink: certProof }
+                  ]);
+                  triggerAlert("Verified certificate synced.");
+                }
+                setCertName("");
+                setCertIssuer("");
+                setCertDate("");
+                setCertProof("");
               }} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 bg-[#111] p-5 border border-glass-stroke text-xs">
-                <div className="md:col-span-3 text-xs font-mono font-black text-primary uppercase tracking-widest mb-1">
-                  Authenticate New Certification
+                <div className="md:col-span-3 text-xs font-mono font-black text-primary uppercase tracking-widest mb-1 flex justify-between items-center">
+                  <span>{editingCertId ? "Modify Certification Details" : "Authenticate New Certification"}</span>
+                  {editingCertId && (
+                    <button 
+                      type="button" 
+                      onClick={() => {
+                        setEditingCertId(null);
+                        setCertName("");
+                        setCertIssuer("");
+                        setCertDate("");
+                        setCertProof("");
+                      }}
+                      className="text-zinc-500 hover:text-white font-mono text-[9px] uppercase tracking-widest cursor-pointer border border-glass-stroke px-2 py-1"
+                    >
+                      Cancel Edit
+                    </button>
+                  )}
                 </div>
-                <input name="certName" placeholder="Machine Learning & Deep Learning Specialization" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
-                <input name="certIssuer" placeholder="Coursera / Stanford University" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
-                <input name="certDate" placeholder="Feb 2026 - Mar 2026" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                <input name="certName" placeholder="Machine Learning & Deep Learning Specialization" required value={certName} onChange={(e) => setCertName(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                <input name="certIssuer" placeholder="Coursera / Stanford University" required value={certIssuer} onChange={(e) => setCertIssuer(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                <input name="certDate" placeholder="Feb 2026 - Mar 2026" required value={certDate} onChange={(e) => setCertDate(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 <div className="md:col-span-3">
-                  <input name="certProof" placeholder="https://example.com/credential/proof-link (Optional link to certificate/PDF)" className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="certProof" placeholder="https://example.com/credential/proof-link (Optional link to certificate/PDF)" value={certProof} onChange={(e) => setCertProof(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 </div>
                 
                 <div className="md:col-span-3 flex justify-end">
                   <button type="submit" className="px-5 py-2.5 bg-[#e31b23] text-white font-label-md text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all font-black cursor-pointer flex items-center gap-1.5">
                     <Plus className="w-3.5 h-3.5" />
-                    Deploy Certificate
+                    {editingCertId ? "Update Certificate" : "Deploy Certificate"}
                   </button>
                 </div>
               </form>
@@ -1243,15 +1386,36 @@ export default function AdminPanel({
                         </p>
                       )}
                     </div>
-                    <button 
-                      onClick={() => {
-                        onUpdateCertifications(certifications.filter(x => x.id !== cert.id));
-                        triggerAlert("Certificate records cleared.");
-                      }}
-                      className="px-2.5 py-1.5 border border-glass-stroke hover:bg-[#e31b23]/10 hover:border-[#e31b23] text-[#e31b23] font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
-                    >
-                      Delete
-                    </button>
+                    <div className="flex gap-2">
+                      <button 
+                        onClick={() => {
+                          setEditingCertId(cert.id);
+                          setCertName(cert.title);
+                          setCertIssuer(cert.issuer);
+                          setCertDate(cert.date);
+                          setCertProof(cert.proofLink || "");
+                        }}
+                        className="px-2.5 py-1.5 border border-glass-stroke hover:bg-primary/10 hover:border-primary text-primary font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        onClick={() => {
+                          onUpdateCertifications(certifications.filter(x => x.id !== cert.id));
+                          triggerAlert("Certificate records cleared.");
+                          if (editingCertId === cert.id) {
+                            setEditingCertId(null);
+                            setCertName("");
+                            setCertIssuer("");
+                            setCertDate("");
+                            setCertProof("");
+                          }
+                        }}
+                        className="px-2.5 py-1.5 border border-glass-stroke hover:bg-[#e31b23]/10 hover:border-[#e31b23] text-[#e31b23] font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1266,32 +1430,55 @@ export default function AdminPanel({
                 </h3>
               </div>
 
-              {/* Form to Add New Milestone */}
+              {/* Form to Add / Edit Milestone */}
               <form onSubmit={(e) => {
                 e.preventDefault();
-                const form = e.currentTarget;
-                const title = (form.elements.namedItem("achTitle") as HTMLInputElement).value;
-                const details = (form.elements.namedItem("achDetails") as HTMLInputElement).value;
+                if (!achTitle || !achDetails) return;
                 
-                onUpdateAchievements([
-                  ...achievements,
-                  { id: `ach-${Date.now()}`, title, details }
-                ]);
-                form.reset();
-                triggerAlert("Scholastic milestone declared.");
+                if (editingAchId) {
+                  const updated = achievements.map(x => 
+                    x.id === editingAchId 
+                      ? { id: editingAchId, title: achTitle, details: achDetails }
+                      : x
+                  );
+                  onUpdateAchievements(updated);
+                  triggerAlert("Milestone successfully updated.");
+                  setEditingAchId(null);
+                } else {
+                  onUpdateAchievements([
+                    ...achievements,
+                    { id: `ach-${Date.now()}`, title: achTitle, details: achDetails }
+                  ]);
+                  triggerAlert("Scholastic milestone declared.");
+                }
+                setAchTitle("");
+                setAchDetails("");
               }} className="space-y-4 mb-8 bg-[#111] p-5 border border-glass-stroke text-xs">
-                <div className="text-xs font-mono font-black text-primary uppercase tracking-widest mb-1">
-                  Log Scholastic Achievement
+                <div className="text-xs font-mono font-black text-primary uppercase tracking-widest mb-1 flex justify-between items-center">
+                  <span>{editingAchId ? "Modify Scholastic Achievement Entry" : "Log Scholastic Achievement"}</span>
+                  {editingAchId && (
+                    <button 
+                      type="button" 
+                      onClick={() => {
+                        setEditingAchId(null);
+                        setAchTitle("");
+                        setAchDetails("");
+                      }}
+                      className="text-zinc-500 hover:text-white font-mono text-[9px] uppercase tracking-widest cursor-pointer border border-glass-stroke px-2 py-1"
+                    >
+                      Cancel Edit
+                    </button>
+                  )}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input name="achTitle" placeholder="Coding Ninjas Hackathon Runner-Up" required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
-                  <input name="achDetails" placeholder="Runner-Up in a 24-hour engineering sprint held at LPU showcasing ML pipeline." required className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="achTitle" placeholder="Coding Ninjas Hackathon Runner-Up" required value={achTitle} onChange={(e) => setAchTitle(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
+                  <input name="achDetails" placeholder="Runner-Up in a 24-hour engineering sprint held at LPU showcasing ML pipeline." required value={achDetails} onChange={(e) => setAchDetails(e.target.value)} className="w-full bg-black border border-glass-stroke text-white py-2 px-3 text-xs outline-none focus:border-primary-container" />
                 </div>
                 
                 <div className="flex justify-end">
                   <button type="submit" className="px-5 py-2.5 bg-[#e31b23] text-white font-label-md text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all font-black cursor-pointer flex items-center gap-1.5">
                     <Plus className="w-3.5 h-3.5" />
-                    Declare Milestone
+                    {editingAchId ? "Update Milestone" : "Declare Milestone"}
                   </button>
                 </div>
               </form>
@@ -1304,15 +1491,32 @@ export default function AdminPanel({
                       <h4 className="text-white uppercase font-black text-sm tracking-wider">{ach.title}</h4>
                       <p className="text-secondary font-sans text-xs leading-relaxed mt-2">{ach.details}</p>
                     </div>
-                    <button 
-                      onClick={() => {
-                        onUpdateAchievements(achievements.filter(x => x.id !== ach.id));
-                        triggerAlert("Milestone deleted.");
-                      }}
-                      className="px-2.5 py-1.5 border border-glass-stroke hover:bg-[#e31b23]/10 hover:border-[#e31b23] text-[#e31b23] font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all flex-shrink-0"
-                    >
-                      Delete
-                    </button>
+                    <div className="flex gap-2 flex-shrink-0">
+                      <button 
+                        onClick={() => {
+                          setEditingAchId(ach.id);
+                          setAchTitle(ach.title);
+                          setAchDetails(ach.details);
+                        }}
+                        className="px-2.5 py-1.5 border border-glass-stroke hover:bg-primary/10 hover:border-primary text-primary font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        onClick={() => {
+                          onUpdateAchievements(achievements.filter(x => x.id !== ach.id));
+                          triggerAlert("Milestone deleted.");
+                          if (editingAchId === ach.id) {
+                            setEditingAchId(null);
+                            setAchTitle("");
+                            setAchDetails("");
+                          }
+                        }}
+                        className="px-2.5 py-1.5 border border-glass-stroke hover:bg-[#e31b23]/10 hover:border-[#e31b23] text-[#e31b23] font-label-md text-[9px] uppercase tracking-widest cursor-pointer transition-all"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

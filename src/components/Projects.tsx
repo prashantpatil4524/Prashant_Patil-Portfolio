@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Project, Category } from "../types";
 import { Info, ExternalLink, Calendar, Users, Cpu } from "lucide-react";
+import { sanitizeUrl } from "../utils";
 
 interface ProjectsProps {
   projects: Project[];
@@ -455,7 +456,7 @@ export default function Projects({ projects, categories }: ProjectsProps) {
                 {activeProject.projectLink && (
                   <div className="pt-6 flex justify-end">
                     <a
-                      href={activeProject.projectLink}
+                      href={sanitizeUrl(activeProject.projectLink)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-primary/20 hover:bg-primary border border-primary/50 hover:border-primary text-white px-8 py-3.5 font-mono text-xs uppercase tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer font-bold hover:shadow-[0_0_30px_var(--glow-soft)]"
