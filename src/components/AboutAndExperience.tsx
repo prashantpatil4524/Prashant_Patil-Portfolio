@@ -109,7 +109,11 @@ export default function AboutAndExperience({ profile, educations, experiences }:
             </div>
 
             <div className="space-y-8">
-              {educations.map((edu) => (
+              {[...educations].sort((a, b) => {
+                const yearA = Math.max(...(a.date.match(/\d{4}/g) || ["0"]).map(Number));
+                const yearB = Math.max(...(b.date.match(/\d{4}/g) || ["0"]).map(Number));
+                return yearB - yearA;
+              }).map((edu) => (
                 <div key={edu.id} className="relative pl-6 border-l border-glass-stroke hover:border-primary transition-colors">
                   <div className="absolute w-3 h-3 bg-zinc-450 dark:bg-zinc-800 border border-glass-stroke left-[-6.5px] top-1.5" />
                   <span className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest block mb-1">

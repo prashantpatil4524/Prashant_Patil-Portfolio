@@ -1134,7 +1134,11 @@ export default function AdminPanel({
 
               {/* Education List */}
               <div className="space-y-4">
-                {educations.map((edu) => (
+                {[...educations].sort((a, b) => {
+                  const yearA = Math.max(...(a.date.match(/\d{4}/g) || ["0"]).map(Number));
+                  const yearB = Math.max(...(b.date.match(/\d{4}/g) || ["0"]).map(Number));
+                  return yearB - yearA;
+                }).map((edu) => (
                   <div key={edu.id} className="flex justify-between items-start bg-black/45 border border-glass-stroke p-5">
                     <div>
                       <h4 className="text-white uppercase font-black text-md tracking-wider">{edu.degree}</h4>
